@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from './create-store';
-import { todos } from './reducers/todos';
+import { createStore } from './redux_functions/createStore';
+// import { todos } from './reducers/todos';
+import { todoApp } from './reducers/todoApp';
 
-
-const store = createStore(todos);
+const store = createStore(todoApp);
 console.log(store);
 const render = () => {
   ReactDOM.render (
@@ -27,6 +27,11 @@ console.log(store.getState());
 store.dispatch({
   type: 'TOGGLE_TODO',
   id: 1
+});
+console.log(store.getState());
+store.dispatch({
+  type: 'SET_VISIBILITY_FILTER',
+  filter: 'SHOW_COMPLETED'
 });
 console.log(store.getState());
 
