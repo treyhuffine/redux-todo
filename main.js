@@ -10,7 +10,7 @@ const store = createStore(todoApp);
 const render = () => {
   console.log(store.getState());
   ReactDOM.render (
-    <TodoApp todos={store.getState().todos} store={store} />,
+    <TodoApp store={store} />,
     document.getElementById('root')
   );
 };
