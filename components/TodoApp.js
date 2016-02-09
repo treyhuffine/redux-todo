@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { FilterLink } from './FilterLink';
-import { TodoList } from './TodoList'
+import { TodoList } from './TodoList';
+import { AddTodo } from './AddTodo';
+import { Footer } from './Footer';
 
 export class TodoApp extends Component {
   constructor(props) {
@@ -31,20 +33,15 @@ export class TodoApp extends Component {
     console.log(visibleTodos);
     return (
       <div>
-        <input ref={node => {
-          this.input = node;
-        }} />
-        <br />
-        <button onClick={() => {
-          this.props.store.dispatch({
-            type: 'ADD_TODO',
-            text: this.input.value,
-            id: this.nextTodoId++
-          });
-          this.input.value = '';
-        }}>
-          Add Todo
-        </button>
+        <AddTodo
+          onAddClick={text =>
+            this.props.store.dispatch({
+              type: 'ADD_TODO',
+              id: this.nextTodoId++,
+              text
+            })
+          }
+        />
         <TodoList
           todos={visibleTodos}
           onTodoClick={id =>
@@ -54,30 +51,15 @@ export class TodoApp extends Component {
             })
           }
         />
-        <p>
-          Show: {' '}
-          <FilterLink
-            filter='SHOW_ALL'
-            store={this.props.store}
-            currentFilter={visibilityFilter}
-          >
-            All
-          </FilterLink>{' '}
-          <FilterLink
-            filter='SHOW_ACTIVE'
-            store={this.props.store}
-            currentFilter={visibilityFilter}
-          >
-            Active
-          </FilterLink>{' '}
-          <FilterLink
-            filter='SHOW_COMPLETED'
-            store={this.props.store}
-            currentFilter={visibilityFilter}
-          >
-            Completed
-          </FilterLink>{' '}
-        </p>
+        <Footer
+          visibilityFilter={visibilityFilter}
+          onFilterClick={filter =>
+            this.props.store.dispatch({
+              type: 'SET_VISIBILITY_FILTER',
+              filter
+            })
+          }
+        />
       </div>
     );
   }
