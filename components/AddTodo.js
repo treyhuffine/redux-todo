@@ -1,37 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-class AddTodo extends Component {
-  constructor(props) {
-    super(props);
-    this.nextTodoId = 0;
-  }
+let nextTodoId = 0;
+let AddTodo = ({ dispatch }) => {
+  let input;
 
-  render() {
-    let input;
-    const { store } = this.context;
-
-    return (
-      <div>
-        <input ref={node => {
-          input = node
-        }} />
-        <br />
-        <button onClick={() => {
-            store.dispatch({
-              type: 'ADD_TODO',
-              text: input.value,
-              id: this.nextTodoId++
-            })
-            input.value = '';
-        }} >
-          Add Todo
-        </button>
-      </div>
-      )
-  };
+  return (
+    <div>
+      <input ref={node => {
+        input = node
+      }} />
+      <br />
+      <button onClick={() => {
+          dispatch({
+            type: 'ADD_TODO',
+            text: input.value,
+            id: nextTodoId++
+          })
+          input.value = '';
+      }} >
+        Add Todo
+      </button>
+    </div>
+  )
 };
-AddTodo.contextTypes = {
-  store: React.PropTypes.object
-}
+
+AddTodo = connect()(AddTodo);
 
 export { AddTodo };
