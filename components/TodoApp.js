@@ -53,7 +53,6 @@ export class TodoApp extends Component {
         />
         <Footer
           store={this.props.store}
-          visibilityFilter={visibilityFilter}
         />
       </div>
     );
