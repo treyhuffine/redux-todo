@@ -7,13 +7,8 @@ import { TodoApp } from './components/TodoApp';
 
 const store = createStore(todoApp);
 
-const render = () => {
-  console.log(store.getState());
-  ReactDOM.render (
-    <TodoApp store={store} />,
-    document.getElementById('root')
-  );
-};
+ReactDOM.render (
+  <TodoApp store={store} />,
+  document.getElementById('root')
+);
 
-store.subscribe(render);
-render();

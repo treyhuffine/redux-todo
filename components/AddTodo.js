@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
 
-export const AddTodo = ({onAddClick}) => {
-  let input;
+export class AddTodo extends Component {
+  constructor(props) {
+    super(props);
+    this.nextTodoId = 0;
+  }
 
-  return (
-    <div>
-      <input ref={node => {
-        input = node
-      }} />
-      <br />
-      <button onClick={() => {
-          onAddClick(input.value);
-          input.value = '';
+  render() {
+    let input;
+    const store = this.props.store;
+
+    return (
+      <div>
+        <input ref={node => {
+          input = node
+        }} />
+        <br />
+        <button onClick={() => {
+            store.dispatch({
+              type: 'ADD_TODO',
+              text: input.value,
+              id: this.nextTodoId++
+            })
+            input.value = '';
         }} >
-        Add Todo
-      </button>
-    </div>
-  );
+          Add Todo
+        </button>
+      </div>
+      )
+  };
 };
