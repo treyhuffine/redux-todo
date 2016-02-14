@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "react-redux": "^4.4.0",
     "redux": "^3.0.5"
   },
   "devDependencies": {
@@ -26,7 +27,8 @@
   },
   "babel": {
     "presets": [
-      "es2015", "react"
+      "es2015",
+      "react"
     ]
   }
 }
