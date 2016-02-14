@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class AddTodo extends Component {
+class AddTodo extends Component {
   constructor(props) {
     super(props);
     this.nextTodoId = 0;
@@ -8,7 +8,7 @@ export class AddTodo extends Component {
 
   render() {
     let input;
-    const store = this.props.store;
+    const { store } = this.context;
 
     return (
       <div>
@@ -30,3 +30,8 @@ export class AddTodo extends Component {
       )
   };
 };
+AddTodo.contextTypes = {
+  store: React.PropTypes.object
+}
+
+export { AddTodo };
